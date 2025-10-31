@@ -359,6 +359,53 @@ def prompt_delete(req: func.HttpRequest) -> func.HttpResponse:
         mimetype="application/json"
     )
 
+@app.function_name(name="utils_welcome")
+@app.route(route="utils/welcome", methods=["GET"])
+def utils_welcome(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("utils/welcome called")
+    return func.HttpResponse(
+        json.dumps({"result": True, "msg": "Welcome to Quiplash API"}),
+        mimetype="application/json"
+    )
+
+
+@app.function_name(name="utils_get")
+@app.route(route="utils/get", methods=["POST"])
+def utils_get(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("utils/get called")
+
+    try:
+        body = req.get_json()
+        data_type = body.get("type")
+    except ValueError:
+        return func.HttpResponse(
+            json.dumps({"result": False, "msg": "Invalid JSON"}),
+            mimetype="application/json"
+        )
+
+    if data_type not in ["player", "prompt"]:
+        return func.HttpResponse(
+            json.dumps({"result": False, "msg": "Invalid type"}),
+            mimetype="application/json"
+        )
+
+    container = player_container if data_type == "player" else prompt_container
+
+    try:
+        items = list(container.read_all_items())
+        return func.HttpResponse(
+            json.dumps({"result": True, "data": items}, default=str),
+            mimetype="application/json"
+        )
+    except Exception as e:
+        logging.error(f"utils/get failed: {e}")
+        return func.HttpResponse(
+            json.dumps({"result": False, "msg": "Internal error"}),
+            mimetype="application/json",
+            status_code=500
+        )
+
+
 @app.function_name(name="player_register")
 @app.route(route="player/register", methods=["POST"])
 def player_register(req: func.HttpRequest) -> func.HttpResponse:
