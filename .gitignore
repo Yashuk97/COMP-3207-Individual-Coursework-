@@ -10,10 +10,11 @@ venv/
 *.sqlite3
 
 # VSCode
-.vscode/
 
 # Azure Functions local settings
 local.settings.json
 
 # macOS
 .DS_Store
+
+.python_packages

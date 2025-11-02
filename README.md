@@ -1,20 +1,21 @@
-# COMP3207 Individual Coursework – Quiplash (Azure Function App)
+# Quiplash Cloud Function App (COMP3207 Coursework)
 
-This project implements a **serverless backend** for the Quiplash game using **Azure Functions in Python**.  
-It integrates with **Azure Cosmos DB (NoSQL)** to manage player profiles and game prompts.
+This Azure Function App implements the backend for a Quiplash-style game.
+It includes endpoints for player registration, login, score updates, and prompt management.
 
----
+## Endpoints
 
-## 🚀 Project Overview
+| Route | Method | Description |
+|--------|--------|-------------|
+| /utils/welcome | GET | Health check |
+| /player/register | POST | Register new player |
+| /player/login | POST | Login existing player |
+| /player/update | POST | Update score and games played |
+| /prompt/create | POST | Add a new prompt |
+| /prompt/moderate | POST | Approve or reject a prompt |
+| /prompt/delete | POST | Delete a prompt |
+| /utils/get | POST | Retrieve all players or prompts |
 
-The Quiplash application enables players to:
-- Register and store profiles in Cosmos DB  
-- Manage custom prompts  
-- Retrieve and interact with data via HTTP-triggered Azure Functions  
+Database: Azure Cosmos DB (`player` and `prompt` containers, partition key `/username`)
 
-This project forms part of the **COMP3207: Distributed Systems coursework** at the University of Southampton.
-
----
-
-## 🧱 Project Structure
-
+Author: Yasaswini Kalavakuri
