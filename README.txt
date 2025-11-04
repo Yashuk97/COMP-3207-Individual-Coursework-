@@ -1,12 +1,6 @@
 COMP3207 Coursework 1 - Part 1
 Name: Yasaswini Kalavakuri (yk3g23)
 
-Deployment URL:
-https://quiplash-func-yasaswini.azurewebsites.net
-
-Function App Key:
-lQmklH_K2rnD3e4YdonwH0j6bm1M6ZKgMg8cUo7l0CDrAzFuujcDmw==
-
 Cosmos DB:
 Database: quiplash
 Containers: player, prompt
